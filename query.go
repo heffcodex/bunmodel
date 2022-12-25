@@ -6,11 +6,6 @@ import (
 	"github.com/uptrace/bun"
 )
 
-const (
-	SepAND = " AND "
-	SepOR  = " OR "
-)
-
 func UpdateColumns(ctx context.Context, db bun.IDB, model any, columns []string, options ...QueryOption) error {
 	q := db.NewUpdate().Model(model).WherePK()
 
