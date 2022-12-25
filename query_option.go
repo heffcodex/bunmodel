@@ -70,6 +70,21 @@ func Limit(limit int) QueryOption {
 	}
 }
 
+func Returning(ret string) QueryOption {
+	return func(q bun.Query) {
+		switch q := q.(type) {
+		case *bun.InsertQuery:
+			q.Returning(ret)
+		case *bun.UpdateQuery:
+			q.Returning(ret)
+		case *bun.DeleteQuery:
+			q.Returning(ret)
+		default:
+			panic("Returning only works with InsertQuery, UpdateQuery, DeleteQuery")
+		}
+	}
+}
+
 func QueryOptions[Q bun.Query](q Q, options ...QueryOption) Q {
 	for _, opt := range options {
 		opt(q)
