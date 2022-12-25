@@ -85,6 +85,8 @@ func Returning(ret string) QueryOption {
 	}
 }
 
+func ReturningAll() QueryOption { return Returning(RetAll) }
+
 func QueryOptions[Q bun.Query](q Q, options ...QueryOption) Q {
 	for _, opt := range options {
 		opt(q)
